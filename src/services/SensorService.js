@@ -37,7 +37,12 @@ export async function getTempSensorData() {
 }
 
 export async function getAllConnectedSensors() {
-    const response = await fetch(`/api/getDevices`);
-    return await response.json();
+    try {
+        const response = await fetch(`/api/getDevices`);
+        return await response.json();
+    } catch( error){
+        console.error(error);
+    }
+    return null;
 }
 

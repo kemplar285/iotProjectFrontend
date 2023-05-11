@@ -1,7 +1,7 @@
 <template>
-  <HelloWorld />
+  <TabOne />
 </template>
 
 <script setup>
-  import HelloWorld from '@/components/HelloWorld.vue'
+  import TabOne from '@/components/TabOne.vue'
 </script>

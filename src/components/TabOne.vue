@@ -24,15 +24,16 @@
   </div>
 
   <div class="d-flex justify-center w-100">
-    <v-card class="ma-5" width="85%" height="250">
+    <v-card class="ma-5 overflow-y-auto" width="85%" max-height="300">
       <v-list lines="one">
+        <h5 class="text-h5 ml-3">All online devices</h5>
+        <v-divider></v-divider>
         <v-list-item
           v-for="sensor in sensors"
           :key="sensor.deviceid"
           :title="sensor.brandName + ` ` + sensor.name"
           :subtitle="`Online time: ` + (sensor.onlineTime || `Unknown`)"
         >
-          <v-list-item-subtitle> asaf </v-list-item-subtitle>
         </v-list-item>
       </v-list>
     </v-card>
@@ -44,7 +45,7 @@ import {
   getTempSensorData,
   getAllConnectedSensors,
 } from "@/services/SensorService.js";
-import { onBeforeMount, onMounted, ref } from "vue";
+import { onBeforeMount, ref } from "vue";
 
 var temp = ref(null);
 var humidity = ref(null);
@@ -57,15 +58,12 @@ function fetchData() {
   });
 }
 
-onMounted(() => {
-  setInterval(fetchData, 10000);
-});
-
 onBeforeMount(() => {
   getAllConnectedSensors().then((result) => {
     console.log(result);
     sensors.value = result;
   });
+  setInterval(fetchData, 5000);
 });
 </script>
 
